@@ -17,44 +17,96 @@ The text of the button can be derived from the value of that one slice of state.
 STEP 0:
   Start by studying the component below, and importing the state hook.
 
-STEP 1:
-  Create a 'spinnerOn', 'setSpinnerOn' pair of variables using the state hook.
-  The 'spinnerOn' slice should be initialized to true so the spinner is visible on page load.
+// STEP 1:
+//   Create a 'spinnerOn', 'setSpinnerOn' pair of variables using the state hook.
+//   The 'spinnerOn' slice should be initialized to true so the spinner is visible on page load.
 
-STEP 2:
-  This is called a logical expression. If the expressions on both sides of the '&&' are truthy,
-  the one on the right becomes the value of the whole line. If an expression on either side of the '&&'
-  is falsy, the one on the left becomes the value of the whole line. It's a neat little trick to render
-  a React element (in this case the spinner) conditionally: only if the variable on the left is truthy.
+// STEP 2:
+//   This is called a logical expression. If the expressions on both sides of the '&&' are truthy,
+//   the one on the right becomes the value of the whole line. If an expression on either side of the '&&'
+//   is falsy, the one on the left becomes the value of the whole line. It's a neat little trick to render
+//   a React element (in this case the spinner) conditionally: only if the variable on the left is truthy.
 
-  Replace the hard-coded 'true' with the variable that keeps track of whether spinner is on or not.
+//   Replace the hard-coded 'true' with the variable that keeps track of whether spinner is on or not.
 
-STEP 3:
-  Use a ternary expression inside the text of the button, to render "Hide" or "Show" depending on the value of 'spinnerOn'.
+// STEP 3:
+//   Use a ternary expression inside the text of the button, to render "Hide" or "Show" depending on the value of 'spinnerOn'.
 
-STEP 4:
-  This click handler needs to toggle the spinner by setting "whether on" to be the opposite of what it currently is.
-  Do you remember the operator we use to do "not"?
-*/
+// STEP 4:
+//   This click handler needs to toggle the spinner by setting "whether on" to be the opposite of what it currently is.
+//   Do you remember the operator we use to do "not"?
+// */
 
-import React from 'react'; /* STEP 0 */
+// import React from 'react'; /* STEP 0 */
 
-export default function Spinner() {
-/* STEP 1 */
+// export default function Spinner() {
+// /* STEP 1 */
 
-  const toggleSpinner = () => {
-  /* STEP 4 */
+//   const toggleSpinner = () => {
+//   /* STEP 4 */
+//   };
+
+//   return (
+//     <div className='widget-spinner container'>
+//       <h2>Spinner</h2>
+//       {
+//         true && <div id='spinner' className='spinner'>--+--</div> /* STEP 2 */
+//       }
+//       <button id='toggleSpinner' onClick={toggleSpinner}>
+//         Hide Spinner {/* STEP 3 */}
+//       </button>
+//     </div>
+//   );
+// }
+import React, { useState } from 'react';
+
+export const listOfAwesome = [
+  { id: '1', name: 'Ada Lovelace' },
+  { id: '2', name: 'Grace Hopper' },
+  { id: '3', name: 'Evelyn Boyd Granville' },
+  { id: '4', name: 'Mary Kenneth Keller' },
+  { id: '5', name: 'Frances Allen' },
+  { id: '6', name: 'Carol Shaw' },
+];
+
+export default function Programmers() {
+  const [programmers, setProgrammers] = useState(listOfAwesome);
+  const [featuredId, setFeaturedId] = useState(null);
+
+  const getNameOfFeatured = () => {
+    const featuredProgrammer = programmers.find(dev => dev.id === featuredId);
+    return featuredProgrammer ? featuredProgrammer.name : '';
+  };
+
+  const featureProgrammer = (id) => {
+    setFeaturedId(id);
+  };
+
+  const style = {
+    fontSize: '1.5em',
+    marginTop: '0.5em',
+    color: featuredId ? 'gold' : 'royalblue',
   };
 
   return (
-    <div className='widget-spinner container'>
-      <h2>Spinner</h2>
-      {
-        true && <div id='spinner' className='spinner'>--+--</div> /* STEP 2 */
-      }
-      <button id='toggleSpinner' onClick={toggleSpinner}>
-        Hide Spinner {/* STEP 3 */}
-      </button>
+    <div className='widget-programmers container'>
+      <h2>Programmers</h2>
+      <div className='programmers'>
+        {
+          programmers.map(dev =>
+            <div className='programmer' key={dev.id}>
+              {dev.name} <button onClick={() => featureProgrammer(dev.id)}>Feature</button>
+            </div>
+          )
+        }
+      </div>
+      <div id='featured' style={style}>
+        {
+          featuredId
+            ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳`
+            : 'Pick an awesome programmer'
+        }
+      </div>
     </div>
   );
 }
