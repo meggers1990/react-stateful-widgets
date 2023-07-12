@@ -60,7 +60,9 @@ STEP 0:
 // }
 import React, { useState } from 'react';
 
-export const listOfAwesome = [
+export default function spinner();
+
+const listOfAwesome = [
   { id: '1', name: 'Ada Lovelace' },
   { id: '2', name: 'Grace Hopper' },
   { id: '3', name: 'Evelyn Boyd Granville' },

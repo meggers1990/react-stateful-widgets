@@ -72,11 +72,13 @@ export default function Squares() {
 
   const getClassName = id => {
     return id === activeSquare ? 'active' : '';
-  };
-
-  const markActive = id => {
-    setActiveSquare(prevActiveSquare => prevActiveSquare === id ? null : id);
-  };
+    if(id ===activeSquare) {
+      setActiveSquare(null);
+    } else {
+      setActiveSquare(id);
+    }
+};
+}  
 
   return (
     <div className='widget-squares container'>
@@ -96,4 +98,3 @@ export default function Squares() {
       </div>
     </div>
   );
-}

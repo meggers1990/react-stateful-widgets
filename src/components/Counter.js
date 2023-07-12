@@ -84,9 +84,10 @@ STEP 6:
 import React, { useState } from 'react';
 
 export default function Counter() {
-  const [count, setCount] = useState(0); /* STEP 1 */
 
+  const [count, setCount] = useState(0); /* STEP 1 */
   const increment = () => {
+
     setCount(count + 1); /* STEP 4 */
   };
 

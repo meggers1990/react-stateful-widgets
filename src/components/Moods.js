@@ -13,14 +13,19 @@ But a single slice of state is more than enough to keep track of all these moods
 STEP 0:
   Study the component below, and import the state hook.
 
-// import React, { useState } from 'react';
+ 
+
+
+
+/* STEP 1 */
+import React, { useState } from 'react';
 
 const initialMood = 'Not sure how I feel';
 const happyMood = 'Quite happy!';
 const sadMood = 'Rather sad';
 
 export default function Moods() {
-  const [mood, setMood] = useState(initialMood); /* STEP 1 */
+  const [mood, setMood] = useState(initialMood); 
 
   const makeHappy = () => {
     setMood(happyMood); /* STEP 4 */
@@ -51,3 +56,4 @@ export default function Moods() {
       </div>
     </div>
   );
+}
